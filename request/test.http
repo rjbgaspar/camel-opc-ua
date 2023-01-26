@@ -1,0 +1,23 @@
+###
+POST http://localhost:50123/api/nodes
+Content-Type: application/json
+Accept: application/json
+
+{
+  "namespaceIndex": 3,
+  "identifier": 1002,
+  "value": "this is a test 5",
+  "type": "java.lang.String"
+}
+
+###
+POST http://localhost:50123/api/nodes
+Content-Type: application/json
+Accept: application/json
+
+{
+  "namespaceIndex": 3,
+  "identifier": 9999999,
+  "value": "this is a test 5",
+  "type": "java.lang.String"
+}
