@@ -6,7 +6,7 @@ Accept: application/json
 {
   "namespaceIndex": 3,
   "identifier": 1002,
-  "value": "this is a test 5",
+  "value": "Test 7",
   "type": "java.lang.String"
 }
 
@@ -18,6 +18,6 @@ Accept: application/json
 {
   "namespaceIndex": 3,
   "identifier": 9999999,
-  "value": "this is a test 5",
+  "value": "Faill",
   "type": "java.lang.String"
 }
