@@ -73,7 +73,8 @@ class OPCUARouteBuilder extends RouteBuilder {
 //					log.info("Route '{}': Status: {}, Value: {}",
 //							routeId,
 //							data.getStatusCode().toString(), data.getValue().getValue());
-//				});
+//				})
+//		.to("file:D:\\tmp\\out");
 //
 //	}
 
@@ -83,8 +84,9 @@ class OPCUARouteBuilder extends RouteBuilder {
 		String ENDPOINT_URI = "milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500";
 
 		from("direct:start")
-				.setHeader(HEADER_NODE_IDS, constant(Arrays.asList("ns=3;i=1002")))
-				.setHeader(HEADER_AWAIT, constant(true)) // await: parameter "defaultAwaitWrites"
+				.log("Processing ${body}")
+				.setHeader(HEADER_NODE_IDS, constant(Arrays.asList("ns=3;i=1002","ns=3;i=1005")))
+//				.setHeader(HEADER_AWAIT, constant(true)) // await: parameter "defaultAwaitWrites"
 				.enrich(ENDPOINT_URI, new AggregationStrategy() {
 					@Override
 					public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
@@ -98,7 +100,7 @@ class OPCUARouteBuilder extends RouteBuilder {
 							routeId,
 							data.getStatusCode().toString(), data.getValue().getValue());
 				})
-				.to("mock:test1");
+				.to("file:D:\\tmp\\out");
 //				.log("Processing ${id}");
 	}
 }
