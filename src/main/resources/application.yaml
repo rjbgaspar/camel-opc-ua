@@ -10,20 +10,36 @@ logging:
     org.eclipse.milo: INFO
     org.apache.camel: DEBUG
 
-nexiles:
-  # endpoint: milo-client:tcp://192.168.123.2:4840?allowedSecurityPolicies=None&node=RAW(ns=3;s="103_Servo_G"."M150_Data"."POS_ACT")
-  # endpoint: milo-client:tcp://127.0.0.1:12686/example?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=2;s=HelloWorld/ScalarTypes/Double)
-#  endpoint: milo-client:tcp://127.0.0.1:12686/example?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=2;s=HelloWorld/Dynamic/Double)
-
-
-#  endpoint: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=2;i=1002)
- endpoint: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=3;i=1002)
-  #endpoint: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500?node=RAW(ns=2;s=Methods)=RAW(ns=2;s=Methods/sqrt(x))=true=true
-
-
 camel:
   component:
     milo-client:
       default-configuration:
         allowed-security-policies: None
         override-host: true
+
+
+com.gv.component:
+  milo-client:
+    device-0006:
+      consumer:
+        route-id: PC-017P Emp | Hot Press Outlet PLC Consumer
+        input: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=2)
+        output: direct:start-device-0006
+      aggregator:
+        route-id: PC-017P Emp | Hot Press Outlet PLC Aggregator
+        input: direct:start-device-0006
+        enricher: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500
+        enricher-header-node-ids: ns=4;i=3, ns=4;i=4, ns=4;i=5, ns=4;i=6
+        output: mock:test
+#            output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
+    prosys-simulation-server:
+      consumer:
+        route-id: Prosys OPC Simulation Server Consumer
+        input: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=3;i=1005)
+        output: direct:start-prosys-simulation-server
+      aggregator:
+        route-id: Prosys OPC Simulation Server Consumer Aggregator
+        input: direct:prosys-simulation-server
+        enricher: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500
+        enricher-header-node-ids: ns=3;i=1002, ns=3;i=1005
+        output: mock:test

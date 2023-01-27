@@ -20,7 +20,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-@RestController
+//@RestController
 @RequestMapping("/api")
 @Log4j2
 @RequiredArgsConstructor
