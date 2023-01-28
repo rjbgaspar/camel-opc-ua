@@ -1,0 +1,60 @@
+###
+POST http://localhost:50123/api/camel-milo
+Content-Type: application/json
+Accept: application/json
+
+{
+  "produceUri":"milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500",
+  "payload":[
+    {
+      "nodeId":{
+        "namespaceIndex":3,
+        "identifier":1002
+      },
+      "value":"ZPH-V123-00001"
+    },
+    {
+      "nodeId":{
+        "namespaceIndex":3,
+        "identifier":1003
+      },
+      "value":"PC-017P"
+    },
+    {
+      "nodeId":{
+        "namespaceIndex":3,
+        "identifier":1004
+      },
+      "value":1
+    },
+    {
+      "nodeId":{
+        "namespaceIndex":3,
+        "identifier":1005
+      },
+      "value":"MFG-V123-000001"
+    },
+    {
+      "nodeId":{
+        "namespaceIndex":3,
+        "identifier":1006
+      },
+      "value":50
+    },
+    {
+      "nodeId":{
+        "namespaceIndex":3,
+        "identifier":1007
+      },
+      "value":0
+    },
+    {
+      "nodeId":{
+        "namespaceIndex":3,
+        "identifier":1008
+      },
+      "value":"Porta A5 Favo Ppl 28 + Mdf 3 OF 2000x800x35"
+    }
+  ]
+}
+
