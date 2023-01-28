@@ -7,7 +7,7 @@ import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 @Log4j2
 public class ProsysSimulationServerConsumer extends RouteBuilder {

@@ -2,13 +2,15 @@ server.port: 50123
 
 spring:
   application:
-    name: Nexiles OPC UA Client Example
+    name: Grupo Valco OPC UA Client Example
 
 logging:
   level:
-    com.nexiles: DEBUG
+    com.camelopcua.component:
+      device0006: ERROR
+      prosyssimulationserver: DEBUG
     org.eclipse.milo: INFO
-    org.apache.camel: DEBUG
+    org.apache.camel: INFO
 
 camel:
   component:
@@ -30,8 +32,9 @@ com.gv.component:
         input: direct:start-device-0006
         enricher: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500
         enricher-header-node-ids: ns=4;i=3, ns=4;i=4, ns=4;i=5, ns=4;i=6
-        output: mock:test
-#            output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
+#        output: mock:test
+        output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
+
     prosys-simulation-server:
       consumer:
         route-id: Prosys OPC Simulation Server Consumer
@@ -39,7 +42,7 @@ com.gv.component:
         output: direct:start-prosys-simulation-server
       aggregator:
         route-id: Prosys OPC Simulation Server Consumer Aggregator
-        input: direct:prosys-simulation-server
-        enricher: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500
+        input: direct:start-prosys-simulation-server
+        enricher: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500
         enricher-header-node-ids: ns=3;i=1002, ns=3;i=1005
-        output: mock:test
+        output: http://172.16.2.73:50001/api/do-post?httpMethod=POST

@@ -7,6 +7,7 @@ import org.apache.camel.AggregationStrategy;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ import static org.apache.camel.component.milo.MiloConstants.HEADER_AWAIT;
 import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;
 import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 @Log4j2
 public class ProsysSimulationServerAggregator extends RouteBuilder {
