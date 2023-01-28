@@ -28,7 +28,7 @@ public class Device0006Consumer extends RouteBuilder {
      * the routes using the Java fluent builder syntax.
      */
     @Override
-    public void configure() throws Exception {
+    public void configure() {
         log.debug("Configuring route {} for endpoint: {}", routeId, input);
 
         from(input)

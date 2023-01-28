@@ -9,8 +9,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 import static org.apache.camel.component.milo.MiloConstants.HEADER_AWAIT;
 import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;
 import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
@@ -20,20 +18,17 @@ import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
 @Log4j2
 public class Device0006Aggregator extends RouteBuilder {
 
+    final OpcUaToDtoProcessor processor;
     @Value("${com.gv.component.milo-client.device-0006.aggregator.input}")
     String input;
     @Value("${com.gv.component.milo-client.device-0006.aggregator.output}")
     String output;
     @Value("${com.gv.component.milo-client.device-0006.aggregator.enricher}")
     String enricher;
-
     @Value("${com.gv.component.milo-client.device-0006.aggregator.enricher-header-node-ids}")
     String[] enricherHeaderNodeIds;
-
     @Value("${com.gv.component.milo-client.device-0006.aggregator.route-id}")
     String routeId;
-
-    final OpcUaToDtoProcessor processor;
 
     /**
      * <b>Called on initialization to build the routes using the fluent builder syntax.</b>
@@ -48,13 +43,8 @@ public class Device0006Aggregator extends RouteBuilder {
         from(input)
                 .log("Processing aggregation ${body}")
                 .setHeader(HEADER_NODE_IDS, constant(enricherHeaderNodeIds))
-				.setHeader(HEADER_AWAIT, constant(true)) // await: parameter "defaultAwaitWrites"
-                .enrich(enricher, new AggregationStrategy() {
-                    @Override
-                    public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-                        return newExchange;
-                    }
-                })
+                .setHeader(HEADER_AWAIT, constant(true)) // await: parameter "defaultAwaitWrites"
+                .enrich(enricher, (oldExchange, newExchange) -> newExchange)
                 .process(processor)
                 .log("Process message with body= ${body}")
                 .setHeader(CONTENT_TYPE, constant("Application/json"))

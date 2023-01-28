@@ -24,7 +24,7 @@ public class OpcUaToDtoProcessor implements Processor {
     private final ObjectMapper objectMapper;
 
     @Override
-    public void process(Exchange exchange) throws Exception {
+    public void process(Exchange exchange) {
         String routeId = exchange.getFromRouteId();
 
         ArrayList<String> headers = exchange.getMessage().getHeader(HEADER_NODE_IDS, ArrayList.class);
