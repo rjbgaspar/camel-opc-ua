@@ -22,6 +22,22 @@ camel:
 
 com.gv.component:
   milo-client:
+
+    # -------------------
+    # ag-63-group-devices
+    # -------------------
+    device-0002:
+      consumer:
+        route-id: PC-017P Emp | Hot Press Outlet PLC Consumer
+        input: milo-client:opc.tcp://172.16.16.46:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=3)
+        output: direct:start-device-0006
+      aggregator:
+        route-id: PC-017P Emp | Hot Press Outlet PLC Aggregator
+        input: direct:start-device-0006
+        enricher: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500
+        enricher-header-node-ids: ns=4;i=3, ns=4;i=4
+        output: mock:test
+
     device-0006:
       consumer:
         route-id: PC-017P Emp | Hot Press Outlet PLC Consumer
@@ -46,3 +62,15 @@ com.gv.component:
         enricher: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500
         enricher-header-node-ids: ns=3;i=1002, ns=3;i=1005
         output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
+
+    acl-010-sorter:
+      consumer:
+        route-id: ACL010 Sorter AG92
+        input: milo-client:opc.tcp://172.16.20.60:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=2)
+        output: direct:start-acl-010-sorter
+      aggregator:
+        route-id: PACL010 Sorter AG92 Consumer Aggregator
+        input: direct:start-acl-010-sorter
+        enricher: milo-client:opc.tcp://172.16.20.60:4840?allowedSecurityPolicies=None&samplingInterval=500
+        enricher-header-node-ids: ns=4;i=2, ns=4;i=15, ns=4;i=16
+        output: mock:test

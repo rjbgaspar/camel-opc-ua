@@ -1,4 +1,4 @@
-package com.gv.camelopcua.component.prosyssimulationserver;
+package com.gv.camelopcua.component.ag63;
 
 import com.gv.camelopcua.milo.processor.OpcUaToDtoProcessor;
 import lombok.RequiredArgsConstructor;
@@ -11,21 +11,21 @@ import static org.apache.camel.component.milo.MiloConstants.HEADER_AWAIT;
 import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;
 import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 @Log4j2
-public class ProsysSimulationServerAggregator extends RouteBuilder {
+public class Device0002Aggregator extends RouteBuilder {
 
     final OpcUaToDtoProcessor processor;
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.aggregator.input}")
+    @Value("${com.gv.component.milo-client.device-0002.aggregator.input}")
     String input;
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.aggregator.output}")
+    @Value("${com.gv.component.milo-client.device-0002.aggregator.output}")
     String output;
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.aggregator.enricher}")
+    @Value("${com.gv.component.milo-client.device-0002.aggregator.enricher}")
     String enricher;
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.aggregator.enricher-header-node-ids}")
+    @Value("${com.gv.component.milo-client.device-0002.aggregator.enricher-header-node-ids}")
     String[] enricherHeaderNodeIds;
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.aggregator.route-id}")
+    @Value("${com.gv.component.milo-client.device-0002.aggregator.route-id}")
     String routeId;
 
     /**
@@ -50,5 +50,6 @@ public class ProsysSimulationServerAggregator extends RouteBuilder {
 //                            simple("{ "property": "value"}")
 //                    )
                 .to(output);
+
     }
 }

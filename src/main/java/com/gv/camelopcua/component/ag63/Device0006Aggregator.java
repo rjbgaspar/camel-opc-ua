@@ -1,4 +1,4 @@
-package com.gv.camelopcua.component.device0006;
+package com.gv.camelopcua.component.ag63;
 
 import com.gv.camelopcua.milo.processor.OpcUaToDtoProcessor;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import static org.apache.camel.component.milo.MiloConstants.HEADER_AWAIT;
 import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;
 import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 @Log4j2
 public class Device0006Aggregator extends RouteBuilder {

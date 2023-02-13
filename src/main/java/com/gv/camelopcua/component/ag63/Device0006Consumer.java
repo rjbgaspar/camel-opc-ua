@@ -1,25 +1,25 @@
-package com.gv.camelopcua.component.prosyssimulationserver;
+package com.gv.camelopcua.component.ag63;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+
+/**
+ * Receive message exchanges from OPC UA Client endpoint
+ */
 //@Component
-//@RequiredArgsConstructor
-//@Log4j2
-public class ProsysSimulationServerConsumer extends RouteBuilder {
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.consumer.input}")
+public class Device0006Consumer extends RouteBuilder {
+    @Value("${com.gv.component.milo-client.device-0006.consumer.input}")
     String input;
 
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.consumer.output}")
+    @Value("${com.gv.component.milo-client.device-0006.consumer.output}")
     String output;
 
-    @Value("${com.gv.component.milo-client.prosys-simulation-server.consumer.route-id}")
+    @Value("${com.gv.component.milo-client.device-0006.consumer.route-id}")
     String routeId;
-    String clientId;
 
     /**
      * <b>Called on initialization to build the routes using the fluent builder syntax.</b>
@@ -39,8 +39,6 @@ public class ProsysSimulationServerConsumer extends RouteBuilder {
                     log.info("Route '{}': Status: {}, Value: {}",
                             routeId,
                             data.getStatusCode().toString(), data.getValue().getValue());
-                })
-                .log("Processing ${id}")
-                .to(output);
+                }).to(output);
     }
 }

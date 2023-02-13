@@ -1,4 +1,4 @@
-package com.gv.camelopcua.component.device0006;
+package com.gv.camelopcua.component.acl010;
 
 
 import org.apache.camel.builder.RouteBuilder;
@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 /**
  * Receive message exchanges from OPC UA Client endpoint
  */
-@Component
-public class Device0006Consumer extends RouteBuilder {
-    @Value("${com.gv.component.milo-client.device-0006.consumer.input}")
+//@Component
+public class Acl010SorterConsumer extends RouteBuilder {
+    @Value("${com.gv.component.milo-client.acl-010-sorter.consumer.input}")
     String input;
 
-    @Value("${com.gv.component.milo-client.device-0006.consumer.output}")
+    @Value("${com.gv.component.milo-client.acl-010-sorter.consumer.output}")
     String output;
 
-    @Value("${com.gv.component.milo-client.device-0006.consumer.route-id}")
+    @Value("${com.gv.component.milo-client.acl-010-sorter.consumer.route-id}")
     String routeId;
 
     /**
