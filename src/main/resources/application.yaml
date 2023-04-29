@@ -25,28 +25,31 @@ com.gv.component:
 
     # -------------------
     # ag-63-group-devices
+    #
+    #   172.16.35.100 -> Emp | PC-017 Hot Press Outlet PLC
+    #   172.16.35.105 -> Emp | PLC Simens 001 Agix (RFID Automaton)
     # -------------------
     device-0002:
       consumer:
-        route-id: PC-017P Emp | Hot Press Outlet PLC Consumer
-        input: milo-client:opc.tcp://172.16.16.46:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=3)
+        route-id: PC-017P Emp | PLC Simens 001 Agix (RFID Automaton) Consumer
+        input: milo-client:opc.tcp://172.16.35.105:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=3)
         output: direct:start-device-0006
       aggregator:
         route-id: PC-017P Emp | Hot Press Outlet PLC Aggregator
         input: direct:start-device-0006
-        enricher: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500
+        enricher: milo-client:opc.tcp://172.16.35.100:4840?allowedSecurityPolicies=None&samplingInterval=500
         enricher-header-node-ids: ns=4;i=3, ns=4;i=4
         output: mock:test
 
     device-0006:
       consumer:
         route-id: PC-017P Emp | Hot Press Outlet PLC Consumer
-        input: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=2)
+        input: milo-client:opc.tcp://172.16.35.100:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=2)
         output: direct:start-device-0006
       aggregator:
         route-id: PC-017P Emp | Hot Press Outlet PLC Aggregator
         input: direct:start-device-0006
-        enricher: milo-client:opc.tcp://172.16.16.41:4840?allowedSecurityPolicies=None&samplingInterval=500
+        enricher: milo-client:opc.tcp://172.16.35.100:4840?allowedSecurityPolicies=None&samplingInterval=500
         enricher-header-node-ids: ns=4;i=3, ns=4;i=4, ns=4;i=5, ns=4;i=6
 #        output: mock:test
         output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
@@ -69,7 +72,7 @@ com.gv.component:
         input: milo-client:opc.tcp://172.16.20.60:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=2)
         output: direct:start-acl-010-sorter
       aggregator:
-        route-id: PACL010 Sorter AG92 Consumer Aggregator
+        route-id: ACL010 Sorter AG92 Consumer Aggregator
         input: direct:start-acl-010-sorter
         enricher: milo-client:opc.tcp://172.16.20.60:4840?allowedSecurityPolicies=None&samplingInterval=500
         enricher-header-node-ids: ns=4;i=2, ns=4;i=15, ns=4;i=16
