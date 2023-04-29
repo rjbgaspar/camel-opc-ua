@@ -23,12 +23,12 @@ camel:
 com.gv.component:
   milo-client:
 
-    # -------------------
-    # ag-63-group-devices
+    # -------------------------------------------------------------#
+    # SIMATIC.S7-1500.OPC-UA.Application:AG63-PLC
+    # opc.tcp://172.16.35.105:4840  #
     #
-    #   172.16.35.100 -> Emp | PC-017 Hot Press Outlet PLC
-    #   172.16.35.105 -> Emp | PLC Simens 001 Agix (RFID Automaton)
-    # -------------------
+    # Emp | PLC Simens 001 Agix (RFID Automaton)
+    # -------------------------------------------------------------#
     device-0002:
       consumer:
         route-id: PC-017P Emp | PLC Simens 001 Agix (RFID Automaton) Consumer
@@ -41,6 +41,13 @@ com.gv.component:
         enricher-header-node-ids: ns=4;i=3, ns=4;i=4
         output: mock:test
 
+
+    # -------------------------------------------------------------#
+    # SIMATIC.S7-1500.OPC-UA.Application:AG95-PLC
+    # opc.tcp://172.16.35.100:4840
+    #
+    # Emp | PC-017 Hot Press Outlet PLC
+    # -------------------------------------------------------------#
     device-0006:
       consumer:
         route-id: PC-017P Emp | Hot Press Outlet PLC Consumer
