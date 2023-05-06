@@ -73,14 +73,23 @@ com.gv.component:
         enricher-header-node-ids: ns=3;i=1002, ns=3;i=1005
         output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
 
+
+    # -------------------------------------------------------------#
+    # ????????????????????
+    # opc.tcp://172.16.32.159:4840
+    #
+    # Val | ACL010 AG92 Sorter CPU 1515TF2PN
+    # Username: Valco
+    # Password: ValcoAG92Sorter
+    # -------------------------------------------------------------#
     acl-010-sorter:
       consumer:
         route-id: ACL010 Sorter AG92
-        input: milo-client:opc.tcp://172.16.20.60:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=2)
+        input: milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=4;i=3)
         output: direct:start-acl-010-sorter
       aggregator:
         route-id: ACL010 Sorter AG92 Consumer Aggregator
         input: direct:start-acl-010-sorter
-        enricher: milo-client:opc.tcp://172.16.20.60:4840?allowedSecurityPolicies=None&samplingInterval=500
+        enricher: milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None&samplingInterval=500
         enricher-header-node-ids: ns=4;i=2, ns=4;i=15, ns=4;i=16
         output: mock:test

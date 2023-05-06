@@ -1,10 +1,8 @@
-package com.gv.camelopcua.component.ag63;
+package com.gv.camelopcua.component.ag92;
 
 import com.gv.camelopcua.milo.processor.OpcUaToDtoProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.camel.AggregationStrategy;
-import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,21 +11,21 @@ import static org.apache.camel.component.milo.MiloConstants.HEADER_AWAIT;
 import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;
 import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 @Slf4j
-public class Device0006Aggregator extends RouteBuilder {
+public class ACL010SorterAggregator extends RouteBuilder {
 
     final OpcUaToDtoProcessor processor;
-    @Value("${com.gv.component.milo-client.device-0006.aggregator.input}")
+    @Value("${com.gv.component.milo-client.acl-010-sorter.aggregator.input}")
     String input;
-    @Value("${com.gv.component.milo-client.device-0006.aggregator.output}")
+    @Value("${com.gv.component.milo-client.acl-010-sorter.aggregator.output}")
     String output;
-    @Value("${com.gv.component.milo-client.device-0006.aggregator.enricher}")
+    @Value("${com.gv.component.milo-client.acl-010-sorter.aggregator.enricher}")
     String enricher;
-    @Value("${com.gv.component.milo-client.device-0006.aggregator.enricher-header-node-ids}")
+    @Value("${com.gv.component.milo-client.acl-010-sorter.aggregator.enricher-header-node-ids}")
     String[] enricherHeaderNodeIds;
-    @Value("${com.gv.component.milo-client.device-0006.aggregator.route-id}")
+    @Value("${com.gv.component.milo-client.acl-010-sorter.aggregator.route-id}")
     String routeId;
 
     /**

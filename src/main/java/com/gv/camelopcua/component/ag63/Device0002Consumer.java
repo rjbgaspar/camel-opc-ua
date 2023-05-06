@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * Receive message exchanges from OPC UA Client endpoint
  */
-@Component
+//@Component
 public class Device0002Consumer extends RouteBuilder {
     @Value("${com.gv.component.milo-client.device-0002.consumer.input}")
     String input;
