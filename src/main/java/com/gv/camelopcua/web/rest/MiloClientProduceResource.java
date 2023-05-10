@@ -48,8 +48,9 @@ public class MiloClientProduceResource {
                     final String endpoint = String.format(producerTemplate.getDefaultEndpoint() + "&defaultAwaitWrites=true&node=RAW(ns=%d;i=%d)",
                             it.getNodeId().getNamespaceIndex(), it.getNodeId().getIdentifier());
 
-
-                    Variant v = new Variant(it.getValue());
+                    // StatusCode{name=Bad_TypeMismatch, value=0x80740000, quality=bad}
+                    // ushort(45)
+                    Variant v = new Variant(ushort((Integer)it.getValue()));
 
                     // don't write status
 //                     DataValue dataValue = new DataValue(v, null, new DateTime());
