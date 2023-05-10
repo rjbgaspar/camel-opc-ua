@@ -52,9 +52,9 @@ public class MiloClientProduceResource {
                     Variant v = new Variant(it.getValue());
 
                     // don't write status
-                     DataValue dataValue = new DataValue(v, null, new DateTime());
+//                     DataValue dataValue = new DataValue(v, null, new DateTime());
                     // don't write StatusCode or timestamp, most servers don't support it
-//                    DataValue dataValue = new DataValue(v, null, null);
+                    DataValue dataValue = new DataValue(v, null, null);
 
                     var serverResponse = producerTemplate.requestBody(endpoint, dataValue, DataValue.class);
                     log.info("Write \"ns={};i={}\" status : {}",
