@@ -20,6 +20,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static org.eclipse.milo.opcua.stack.core.Identifiers.UInt16;
+import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.ushort;
+
 
 /**
  * Send message exchanges to endpoints
@@ -49,10 +52,15 @@ public class MiloClientProduceResource {
                     Variant v = new Variant(it.getValue());
 
                     // don't write status
-                    DataValue dataValue = new DataValue(v, null, new DateTime());
+                     DataValue dataValue = new DataValue(v, null, new DateTime());
+                    // don't write StatusCode or timestamp, most servers don't support it
+//                    DataValue dataValue = new DataValue(v, null, null);
 
                     var serverResponse = producerTemplate.requestBody(endpoint, dataValue, DataValue.class);
-
+                    log.info("Write \"ns={};i={}\" status : {}",
+                            it.getNodeId().getNamespaceIndex(),
+                            it.getNodeId().getIdentifier(),
+                            serverResponse.getStatusCode().toString());
                     return new MiloClientMessage(it, serverResponse);
                 }).toList();
 
