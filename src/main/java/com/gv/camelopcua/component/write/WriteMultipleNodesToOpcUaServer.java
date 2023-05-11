@@ -16,7 +16,9 @@ import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.uint;
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.ushort;
 
-
+/**
+ * !!! Could not make it to work !!!!
+ */
 @Component
 public class WriteMultipleNodesToOpcUaServer extends RouteBuilder {
     // Define a list of node IDs to write to
@@ -32,7 +34,7 @@ public class WriteMultipleNodesToOpcUaServer extends RouteBuilder {
         from("timer://timerName?fixedRate=true&period=2000")
         .process(exchange -> {
             // Create a list of WriteValues for each node ID
-            List<WriteValue> writeValues = Arrays.stream(NODES)
+            var writeValues = Arrays.stream(NODES)
                     .map(nodeId -> {
                         var random = MIN + (int)(Math.random() * ((MAX - MIN) + 1));
 
@@ -44,21 +46,27 @@ public class WriteMultipleNodesToOpcUaServer extends RouteBuilder {
                         // return new DataValue(v, null, null);
 
                         //                         var node = NodeId.parse(nodeId);
-                        return new WriteValue(
-                                NodeId.parse(nodeId),
-                                uint(13), //AttributeId.Value
-                                null,
-                                new DataValue(v, null, null)
-                        );
+//                        return new WriteValue(
+//                                NodeId.parse(nodeId),
+//                                uint(13), //AttributeId.Value
+//                                null,
+//                                new DataValue(v, null, null)
+//                        );
+
+                        return new DataValue(v, null, null);
+
+
                     })
                     .collect(Collectors.toList());
 
             exchange.getIn().setHeader(HEADER_NODE_IDS, NODES);
             exchange.getIn().setHeader(HEADER_AWAIT, constant(true)); // await: parameter "defaultAwaitWrites"
 
-            exchange.getIn().setBody(writeValues);
+            exchange.getIn().setBody(new DataValue(new Variant(ushort(98)), null, null));
         })
-        .to("milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None&defaultAwaitWrites=true")
+//        .to("milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None&node=RAW(ns=4;i=4)")
+//        .to("milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None&node=RAW(ns=4;i=4)&node=RAW(ns=4;i=5)")
+        .to("milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None")
         .log("Wrote ${body} to OPC UA server");
     }
 }
