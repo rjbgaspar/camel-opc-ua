@@ -3,6 +3,7 @@ package com.gv.camelopcua.component.write;
 import org.apache.camel.builder.RouteBuilder;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
+import org.springframework.stereotype.Component;
 
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.ushort;
 
