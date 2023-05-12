@@ -4,13 +4,15 @@ spring:
   application:
     name: Grupo Valco OPC UA Client Example
 
-logging:
-  level:
-    com.camelopcua.component:
-      device0006: ERROR
-      prosyssimulationserver: DEBUG
-    org.eclipse.milo: INFO
-    org.apache.camel: INFO
+debug: false
+
+#logging:
+#  level:
+#    com.camelopcua.component:
+#      device0006: ERROR
+#      prosyssimulationserver: DEBUG
+#    org.eclipse.milo: INFO
+#    org.apache.camel: INFO
 
 camel:
   component:

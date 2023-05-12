@@ -38,8 +38,9 @@ public class OpcUaToDtoProcessor implements Processor {
                     new MiloClientMessage(
                             new MiloClientValue(
                                     MiloClientNodeId.fromNamespaceIndexAndIdentifier(headers.get(index)),
+                                    null,
                                     list.get(index).getValue().getValue()
-                            ),
+                                    ),
                             list.get(index)
                     )
             );

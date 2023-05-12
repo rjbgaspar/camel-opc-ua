@@ -1,6 +1,7 @@
 package com.gv.camelopcua.service;
 
 import com.gv.camelopcua.core.types.builtin.MiloClientMessage;
+import com.gv.camelopcua.core.types.builtin.MiloDataType;
 import com.gv.camelopcua.service.dto.MiloClientProduceRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,15 +9,15 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.spring.SpringCamelContext;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
+import org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.UShort;
+import org.eclipse.milo.opcua.stack.core.util.ConversionUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.ushort;
-
-
+import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.*;
 
 
 @Service
@@ -44,7 +45,7 @@ public class ApacheCamelProducerService {
 
                     // StatusCode{name=Bad_TypeMismatch, value=0x80740000, quality=bad}
                     // ushort(45)
-                    Variant v = new Variant(ushort((Integer)it.getValue()));
+                    Variant v = convert(it.getValue(), it.getDataType());
 
                     // don't write status
 //                     DataValue dataValue = new DataValue(v, null, new DateTime());
@@ -83,5 +84,16 @@ public class ApacheCamelProducerService {
 
     private <T> T convert(final Object value, final Class<T> clazz) {
         return camelContext.getTypeConverter().convertTo(clazz, new DataValue(new Variant(value)));
+    }
+
+    private Variant convert(final Object value, MiloDataType dataType) {
+        return new Variant(
+            switch (dataType) {
+                case UInteger -> uint((Integer) value);
+                case ULong -> ulong((Integer) value);
+                case UShort -> ushort((Integer)value);
+                default -> value;
+            }
+        );
     }
 }

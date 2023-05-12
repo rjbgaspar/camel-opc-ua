@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MiloClientValue {
     MiloClientNodeId nodeId;
+    MiloDataType dataType;
     Object value;
 }

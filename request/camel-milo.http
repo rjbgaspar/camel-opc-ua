@@ -1,4 +1,3 @@
-###
 POST http://localhost:50123/api/camel-milo
 Content-Type: application/json
 Accept: application/json
@@ -58,3 +57,31 @@ Accept: application/json
   ]
 }
 
+###
+
+    # Val | ACL010 AG92 Sorter CPU 1515TF2PN
+    # Username: Valco
+    # Password: ValcoAG92Sorter
+# opc.tcp://172.16.32.159:4840
+#   "produceUri":"milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None&username=Valco&password=ValcoAG92Sorter",
+# "produceUri":"milo-client:opc.tcp://Valco:ValcoAG92Sorter@172.16.32.159:4840?allowedSecurityPolicies=None",
+# "produceUri":"milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None",
+
+POST http://localhost:50123/api/camel-milo
+Content-Type: application/json
+Accept: application/json
+
+{
+
+  "produceUri":"milo-client:opc.tcp://172.16.32.159:4840?allowedSecurityPolicies=None",
+  "payload":[
+    {
+      "nodeId":{
+        "namespaceIndex": 4,
+        "identifier": 3
+      },
+      "value": 15,
+      "dataType": "UShort"
+    }
+  ]
+}
