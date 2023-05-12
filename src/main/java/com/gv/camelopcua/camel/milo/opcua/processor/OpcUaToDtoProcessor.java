@@ -6,7 +6,7 @@ import com.gv.camelopcua.camel.milo.opcua.core.types.OpcUaMessage;
 import com.gv.camelopcua.camel.milo.opcua.core.types.OpcUaNodeId;
 import com.gv.camelopcua.camel.milo.opcua.core.types.OpcUaNode;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
@@ -19,7 +19,7 @@ import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;
 
 @Component
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class OpcUaToDtoProcessor implements Processor {
     private final ObjectMapper objectMapper;
 

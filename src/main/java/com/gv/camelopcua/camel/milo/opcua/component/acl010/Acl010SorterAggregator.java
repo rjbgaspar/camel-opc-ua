@@ -3,6 +3,7 @@ package com.gv.camelopcua.camel.milo.opcua.component.acl010;
 import com.gv.camelopcua.camel.milo.opcua.processor.OpcUaToDtoProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -12,7 +13,7 @@ import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
 
 //@Component
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class Acl010SorterAggregator extends RouteBuilder {
 
     final OpcUaToDtoProcessor processor;
