@@ -1,6 +1,7 @@
 package com.gv.camelopcua.camel.milo.opcua.component.ag92;
 
 import com.gv.camelopcua.camel.milo.opcua.processor.OpcUaToDtoProcessor;
+import com.gv.camelopcua.camel.milo.opcua.service.OpcUaProducerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
@@ -15,8 +16,8 @@ import static org.apache.camel.component.rest.RestConstants.CONTENT_TYPE;
 @RequiredArgsConstructor
 @Slf4j
 public class ACL010SorterAggregator extends RouteBuilder {
+    final OpcUaToDtoProcessor toDtoProcessor;
 
-    final OpcUaToDtoProcessor processor;
     @Value("${com.gv.component.milo-client.acl-010-sorter.aggregator.input}")
     String input;
     @Value("${com.gv.component.milo-client.acl-010-sorter.aggregator.output}")
@@ -43,7 +44,7 @@ public class ACL010SorterAggregator extends RouteBuilder {
                 .setHeader(HEADER_NODE_IDS, constant(enricherHeaderNodeIds))
                 .setHeader(HEADER_AWAIT, constant(true)) // await: parameter "defaultAwaitWrites"
                 .enrich(enricher, (oldExchange, newExchange) -> newExchange)
-                .process(processor)
+                .process(toDtoProcessor)
                 .log("Process message with body= ${body}")
                 .setHeader(CONTENT_TYPE, constant("Application/json"))
 //                    .setBody(
