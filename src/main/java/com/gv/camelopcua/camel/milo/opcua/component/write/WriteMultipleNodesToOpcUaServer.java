@@ -19,7 +19,7 @@ import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.
 /**
  * !!! Could not make it to work !!!!
  */
-@Component
+//@Component
 public class WriteMultipleNodesToOpcUaServer extends RouteBuilder {
     // Define a list of node IDs to write to
     private static final String[] NODES = {"ns=4;i=4", "ns=4;i=5", "ns=4;i=6"};

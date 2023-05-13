@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import static org.apache.camel.component.milo.MiloConstants.HEADER_AWAIT;
 import static org.apache.camel.component.milo.MiloConstants.HEADER_NODE_IDS;

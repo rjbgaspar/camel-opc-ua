@@ -66,14 +66,15 @@ com.gv.component:
     prosys-simulation-server:
       consumer:
         route-id: Prosys OPC Simulation Server Consumer
-        input: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=3;i=1005)
+        input: milo-client:opc.tcp://VAL011.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500&node=RAW(ns=3;i=1002)
         output: direct:start-prosys-simulation-server
       aggregator:
         route-id: Prosys OPC Simulation Server Consumer Aggregator
         input: direct:start-prosys-simulation-server
-        enricher: milo-client:opc.tcp://VAL031.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500
-        enricher-header-node-ids: ns=3;i=1002, ns=3;i=1005
-        output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
+        enricher: milo-client:opc.tcp://VAL011.gv.local:53530/OPCUA/SimulationServer?allowedSecurityPolicies=None&samplingInterval=500
+        enricher-header-node-ids: ns=3;i=1001, ns=3;i=1002
+        output: mock:test
+#        output: http://172.16.2.73:50001/api/do-post?httpMethod=POST
 
 
     # -------------------------------------------------------------#
