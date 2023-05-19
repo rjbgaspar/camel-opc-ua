@@ -51,7 +51,7 @@ public class OpcUaProducerService {
                     DataValue dataValue = new DataValue(v, null, null);
 
                     var serverResponse = producerTemplate.requestBody(endpoint, dataValue, DataValue.class);
-                    log.info("Write \"ns={};i={}\" status : {}",
+                    log.trace("Write \"ns={};i={}\" status : {}",
                             it.getNodeId().getNamespaceIndex(),
                             it.getNodeId().getIdentifier(),
                             serverResponse.getStatusCode().toString());
