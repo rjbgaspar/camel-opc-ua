@@ -87,9 +87,9 @@ public class OpcUaProducerService {
     private Variant convert(final Object value, OpcUaDataType dataType) {
         return new Variant(
             switch (dataType) {
-                case UInteger -> uint((Integer) value);
-                case ULong -> ulong((Integer) value);
-                case UShort -> ushort((Integer)value);
+                case UINTEGER -> uint((Integer) value);
+                case ULONG -> ulong((Integer) value);
+                case USHORT -> ushort((Integer)value);
                 default -> value;
             }
         );
